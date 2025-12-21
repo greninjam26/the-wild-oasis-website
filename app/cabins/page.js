@@ -1,5 +1,7 @@
 // whatever javascript we write here will be server rendered
-// server components can be async and can just have await on the top level
+
+export const metadata = { title: "Cabins" };
+
 export default function Page() {
 	// a server component
 	return (

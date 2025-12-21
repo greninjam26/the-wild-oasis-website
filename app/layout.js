@@ -4,7 +4,16 @@ import Navigation from "@/app/_components/Navigation";
 import "@/app/_styles/globals.css";
 
 // this will be come the metadata in the html for the web page
-export const metadata = { title: "The Wild Oasis" };
+// we can replace this by output different metadata from the subpages
+export const metadata = {
+	title: {
+		// the %s is just hte title output by different pages
+		template: "%s / The Wild Oasis",
+		default: "Welcome / The Wild Oasis",
+	},
+	discription:
+		"Luxurious cabin hotel, located in the heart of the Italian Dolomites, surrounded by beautiful mountains and dark forests",
+};
 
 export default function RootLayout({ children }) {
 	// this is the basic struture of the server side layout
