@@ -1,6 +1,8 @@
 import Logo from "@/app/_components/Logo";
 import Navigation from "@/app/_components/Navigation";
 
+import "@/app/_styles/globals.css";
+
 // this will be come the metadata in the html for the web page
 export const metadata = { title: "The Wild Oasis" };
 
@@ -9,7 +11,7 @@ export default function RootLayout({ children }) {
 	// there are another way to add <head>, so only <html> and <body> here
 	return (
 		<html lang="en">
-			<body>
+			<body className=" bg-primary-950 text-primary-100 min-h-screen">
 				<header>
 					<Logo />
 					<Navigation />
