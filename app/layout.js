@@ -1,6 +1,15 @@
 import Logo from "@/app/_components/Logo";
 import Navigation from "@/app/_components/Navigation";
 
+import { Josefin_Sans } from "next/font/google";
+// after this just add the className from josefin to HTML
+const josefin = Josefin_Sans({
+	subsets: ["latin"],
+	// this is display everything with a default font the swap in this font
+	display: "swap",
+	// if the font weight is not variable we need weight:
+});
+
 import "@/app/_styles/globals.css";
 
 // this will be come the metadata in the html for the web page
@@ -20,7 +29,9 @@ export default function RootLayout({ children }) {
 	// there are another way to add <head>, so only <html> and <body> here
 	return (
 		<html lang="en">
-			<body className=" bg-primary-950 text-primary-100 min-h-screen">
+			<body
+				className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen`}
+			>
 				<header>
 					<Logo />
 					<Navigation />
