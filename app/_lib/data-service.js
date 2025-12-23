@@ -13,10 +13,10 @@ export async function getCabin(id) {
 		.single();
 
 	// For testing
-	// await new Promise((res) => setTimeout(res, 1000));
+	// await new Promise(res => setTimeout(res, 1000));
 
 	if (error) {
-    // manually call the notFound function to trigger not-found.js
+		// manually call the notFound function to trigger not-found.js
 		notFound();
 	}
 
@@ -42,6 +42,9 @@ export const getCabins = async function () {
 		.from("cabins")
 		.select("id, name, maxCapacity, regularPrice, discount, image")
 		.order("name");
+
+	// For testing
+	// await new Promise(res => setTimeout(res, 1000));
 
 	if (error) {
 		console.error(error);
