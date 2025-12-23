@@ -3,6 +3,9 @@ import CabinList from "@/app/_components/CabinList";
 import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
 
+// we can put a variable or equation as the value of revalidate, it have to be a fix value
+export const revalidate = 3600;
+
 export const metadata = { title: "Cabins" };
 
 export default function Page() {
