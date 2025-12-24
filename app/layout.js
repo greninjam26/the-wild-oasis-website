@@ -7,8 +7,9 @@ const josefin = Josefin_Sans({
 	// if the font weight is not variable we need weight:
 });
 
+import Header from "@/app/_components/Header";
+import { ReservationProvider } from "@/app/_components/ReservationContext";
 import "@/app/_styles/globals.css";
-import Header from "./_components/Header";
 
 // this will be come the metadata in the html for the web page
 // we can replace this by output different metadata from the subpages
@@ -34,7 +35,9 @@ export default function RootLayout({ children }) {
 
 				<div className="flex-1 px-8 py-12 grid">
 					{/* the children props is the page.js since this is the only layout */}
-					<main className="max-w-7xl mx-auto w-full">{children}</main>
+					<main className="max-w-7xl mx-auto w-full">
+						<ReservationProvider>{children}</ReservationProvider>
+					</main>
 				</div>
 			</body>
 		</html>

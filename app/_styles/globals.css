@@ -37,6 +37,10 @@
 	--rdp-range_end-color: theme("colors.accent.500") !important;
 }
 
+.rdp-selected .rdp-day_button {
+	background-color: theme("colors.accent.600") !important;
+}
+
 .rdp-months {
 	gap: 3rem !important;
 }

@@ -3,6 +3,7 @@ import CabinList from "@/app/_components/CabinList";
 import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
 import Filter from "@/app/_components/Filter";
+import ReservationReminder from "@/app/_components/ReservationReminder";
 
 // we can put a variable or equation as the value of revalidate, it have to be a fix value
 // but with the component dynamic this is useless
@@ -39,6 +40,7 @@ export default function Page({ searchParams }) {
 				key={filter}
 			>
 				<CabinList filter={filter} />
+				<ReservationReminder />
 			</Suspense>
 		</div>
 	);
