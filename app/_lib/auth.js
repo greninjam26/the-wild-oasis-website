@@ -33,7 +33,7 @@ const authConfig = {
 		// this will run after the signIn callback and each time the session is checked out, like when we call the auth function
 		// this method will allows us to get the id of the guest everywhere in the app
 		async session({ session }) {
-			const guest = getGuest(session.user.email);
+			const guest = await getGuest(session.user.email);
 			session.user.guestId = guest.id;
 			// we have to return the session or when we call auth function there will be no session left...
 			return session;
