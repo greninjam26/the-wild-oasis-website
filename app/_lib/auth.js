@@ -11,13 +11,18 @@ const authConfig = {
 	callbacks: {
 		// this function will be ran when the middleware is ran
 		authorized({ auth, request }) {
-      // !! is an easy way to convert something to boolean by checking if they exist or not
+			// !! is an easy way to convert something to boolean by checking if they exist or not
 			return !!auth?.user;
 		},
+	},
+	pages: {
+		signIn: "/login",
 	},
 };
 
 export const {
 	auth,
+	signIn,
+	signOut,
 	handlers: { GET, POST },
 } = NextAuth(authConfig);
