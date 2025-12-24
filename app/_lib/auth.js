@@ -8,6 +8,13 @@ const authConfig = {
 			clientSecret: process.env.AUTH_GOOGLE_SECRET,
 		}),
 	],
+	callbacks: {
+		// this function will be ran when the middleware is ran
+		authorized({ auth, request }) {
+      // !! is an easy way to convert something to boolean by checking if they exist or not
+			return !!auth?.user;
+		},
+	},
 };
 
 export const {
