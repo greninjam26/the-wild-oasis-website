@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
 import { getBookings } from "./data-service";
+import { redirect } from "next/navigation";
 
 export async function signInAction() {
 	await signIn("google", { redirectTo: "/account" });
@@ -46,9 +47,11 @@ export async function deleteReservation(bookingId) {
 	// it is common to not use try/catch in Server Action and just throw a error
 	if (!session) throw new Error("You must be logged in");
 
+	// get all the ids of bookings of the user
 	const guestBookings = await getBookings(session.user.guestId);
 	const guestBookingIds = guestBookings.map(booking => booking.id);
 
+	// check if the booking the user is mutating is their own
 	if (!guestBookingIds.includes(bookingId))
 		throw new Error("You are not allowed to delete this booking");
 
@@ -59,4 +62,40 @@ export async function deleteReservation(bookingId) {
 	}
 
 	revalidatePath("/account/reservations");
+}
+
+export async function updateBooking(formData) {
+	const bookingId = Number(formData.get("bookingId"));
+
+	// we need to check if the user if authorized to do this
+	const session = await auth();
+	// it is common to not use try/catch in Server Action and just throw a error
+	if (!session) throw new Error("You must be logged in");
+
+	// get all the ids of bookings of the user
+	const guestBookings = await getBookings(session.user.guestId);
+	const guestBookingIds = guestBookings.map(booking => booking.id);
+
+	// check if the booking the user is mutating is their own
+	if (!guestBookingIds.includes(bookingId))
+		throw new Error("You are not allowed to delete this booking");
+
+	const updateData = {
+		numGuests: Number(formData.get("numGuests")),
+		// make sure the observations is not too long
+		observations: formData.get("observations").slice(0, 1000),
+	};
+
+	const { error } = await supabase
+		.from("bookings")
+		.update(updateData)
+		.eq("id", bookingId);
+
+	if (error) {
+		throw new Error("Booking could not be updated");
+	}
+
+	revalidatePath("/account/reservations");
+	revalidatePath(`/account/reservations/edit/${bookingId}`);
+	redirect("/account/reservations");
 }
