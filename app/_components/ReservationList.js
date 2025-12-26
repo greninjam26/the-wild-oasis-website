@@ -2,7 +2,7 @@
 
 import { useOptimistic } from "react";
 import ReservationCard from "./ReservationCard";
-import { deleteReservation } from "../_lib/actions";
+import { deleteBooking } from "../_lib/actions";
 
 function ReservationList({ bookings }) {
 	// this hoot allows us to assume the action is successful and display the result before the async action is finished
@@ -18,7 +18,7 @@ function ReservationList({ bookings }) {
 
 	async function handleDelete(bookingId) {
 		optimisticDelete(bookingId);
-		await deleteReservation(bookingId);
+		await deleteBooking(bookingId);
 	}
 
 	return (

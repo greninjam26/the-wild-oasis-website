@@ -25,8 +25,6 @@ function DateSelector({ settings, cabin, bookedDates }) {
 	const numNights = differenceInDays(displayRange.to, displayRange.from);
 	const cabinPrice = numNights * (regularPrice - discount);
 
-	console.log(bookedDates);
-
 	return (
 		<div className="flex flex-col justify-between">
 			<DayPicker
